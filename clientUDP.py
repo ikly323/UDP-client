@@ -23,13 +23,16 @@ class KinematicData:
 
 
 def send_message(message: str, server_address: tuple):
-    list_data = []
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
-        sock.sendto(message.encode(), server_address)
-        for _ in range(5):
-            data = receive_data(sock)
-            list_data.append(data)
-    return list_data
+    try:
+        list_data = []
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+            sock.sendto(message.encode(), server_address)
+            for _ in range(5):
+                data = receive_data(sock)
+                list_data.append(data)
+        return list_data
+    except Exception as e:
+        return []
 
 
 def receive_data(sock):
