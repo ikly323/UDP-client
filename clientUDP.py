@@ -31,7 +31,7 @@ def send_message(message: str, server_address: tuple):
                 data = receive_data(sock)
                 list_data.append(data)
         return list_data
-    except Exception as e:
+    except ConnectionResetError:
         return []
 
 
